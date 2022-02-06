@@ -1,6 +1,6 @@
 ## 本仓库提供群晖系统缺失的一些iptables模块
 
-理论上只要架构、内核以及iptables版本吻合，预编译的模块就可以使用，就是说小版本的系统升级一般不会升级内核，可以继续使用。不吻合切勿尝试，可能造成未知的系统问题。
+理论上只要架构、内核以及iptables版本吻合，预编译的模块就可以使用，或者说小版本的系统升级一般不会升级内核，可以继续使用。不吻合切勿尝试，可能造成未知的系统问题。
 
 架构通过以下页面查询，比如DS918+的架构叫apollolake
 
@@ -34,6 +34,8 @@ iptables v1.8.3 (legacy)
 
 上传相应的so模块至/usr/lib/iptables/
 
+Windows用户注意，模块文件名是区分大小写的，大写的为标记模块，小写的为匹配模块，它们之间是相辅相成的，切勿彼此覆盖。
+
 尝试加载内核模块。由于模块互相有依赖性，需要按一定顺序加载，有些是系统自带的模块。如果提示File Exists，说明已经加载，如果没有提示，说明加载成功。不同内核版本netfilter编译输出的ko内核模块可能不完全一样，以下以DS3617xs 6.2.3-25426为例。
 
 ```bash
@@ -52,9 +54,9 @@ insmod /lib/modules/iptable_mangle.ko
 
 运行lsmod查看已加载的模块列表，或运行dmesg | tail查看模块加载失败的原因
 
-## 编译
+## 如何自编译
 
-### 构造编译docker镜像并启动
+### 启动docker编译镜像
 
 ```bash
 git clone https://github.com/SynoCommunity/spksrc.git
@@ -62,7 +64,7 @@ cd spksrc
 docker run -it -v $(pwd):/spksrc ghcr.io/synocommunity/spksrc /bin/bash
 ```
 
-### 在编译容器中准备所需的toolchain和kernel
+### 在编译容器中准备及下载所需的toolchain和kernel
 
 ```bash
 make setup
@@ -123,3 +125,8 @@ cd iptables-1.6.0
 ./configure --prefix="/spksrc/toolchain/syno-apollolake-6.2.3/work/build" --disable-nftables
 make && make install
 ```
+
+## 感谢
+
+在群晖部署适用 IPv6、Fullcone NAT 的旁路由透明代理
+https://blog.kaaass.net/archives/1576
