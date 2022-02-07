@@ -1,22 +1,24 @@
-## 本仓库提供群晖系统缺失的一些iptables模块
+# 本仓库提供群晖系统缺失的一些iptables模块用于透明代理
 
 理论上只要架构、内核以及iptables版本吻合，预编译的模块就可以使用，或者说小版本的系统升级一般不会升级内核，可以继续使用。不吻合切勿尝试，可能造成未知的系统问题。
 
-架构通过该页面[Synology Architectures](https://github.com/SynoCommunity/spksrc/wiki/Synology-and-SynoCommunity-Package-Architectures)查询，比如DS918+的架构为apollolake
+## 准备工作
 
-内核版本通过uname -a命令查询，比如DS918+ 7.0.1-42218系统内核为4.4.180+（结尾的加号代表自定义编译的内核）
+通过该页面[Synology Architectures](https://github.com/SynoCommunity/spksrc/wiki/Synology-and-SynoCommunity-Package-Architectures)查询架构，比如DS918+的架构为apollolake
+
+通过uname -a命令查询内核版本，比如DS918+ 7.0.1-42218系统内核为4.4.180+（结尾的加号代表自定义编译的内核）
 
 ```bash
 Linux DSM7 4.4.180+ #42218 SMP Mon Oct 18 19:17:56 CST 2021 x86_64 GNU/Linux synology_apollolake_918+
 ```
 
-iptables版本通过iptables -V命令查询
+通过iptables -V命令查询iptables版本
 
 ```bash
 iptables v1.8.3 (legacy)
 ```
 
-本仓库提供的预编译模块在以下系统测试正常。
+本仓库提供以下系统的预编译模块，经测试可以正常加载。
 
 | arch       | kernel    | iptables version | system model | platform version |
 | :--------- | :-------- | :--------------- | :----------- | :--------------- |
@@ -49,6 +51,7 @@ insmod /lib/modules/iptable_mangle.ko
 运行lsmod查看已加载的模块列表，或运行dmesg | tail查看模块加载失败的原因。
 
 ## 如何自编译
+
 本仓库无法提供适合所有群晖系统的预编译模块，有能力的同学可以尝试自编译。
 
 ### 启动docker编译镜像
@@ -99,7 +102,7 @@ cp $MODULE/ipset/*.ko build/ipset
 
 ```
 
-### 编译iptables模块，编译之后so文件在extensions子目录中
+### 编译iptables用户模块，编译之后so文件在extensions子目录中
 
 iptables v1.8.3，适用于syno-apollolake-7.0，请自行调整
 
