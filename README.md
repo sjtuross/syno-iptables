@@ -1,11 +1,12 @@
 # 本仓库提供群晖系统缺失的一些iptables模块
 
-理论上只要架构、内核以及iptables版本吻合，预编译的模块就可以使用，或者说小版本的系统升级一般不会升级内核，可以继续使用。不吻合切勿尝试，可能造成未知的系统问题。
-
-- 用于透明代理 (support transparent proxy)
+- [用于透明代理 (support transparent proxy)](usage/v2raya-transparent-proxy.md)
 - 修复Docker IPv6问题 (fix docker ipv6 issue)
 
+理论上只要架构、内核以及iptables版本吻合，预编译的模块就可以使用，或者说小版本的系统升级一般不会升级内核，可以继续使用。不吻合切勿尝试，可能造成未知的系统问题。
+
 📝 文件名含ip6的用于修复Docker IPv6问题，其余的用于透明代理，根据需要选择
+
 📝 ko内核模块和so用户模块需要同时安装
 
 ## 准备工作
@@ -56,7 +57,9 @@ insmod /lib/modules/xt_TPROXY.ko
 insmod /lib/modules/iptable_mangle.ko
 ```
 
-运行lsmod查看已加载的模块列表，或运行dmesg | tail查看模块加载失败的原因。
+运行lsmod查看已加载的内核模块列表，或运行dmesg | tail查看加载失败的原因。
+
+具体实践分享请查阅[usage](syno-iptables/tree/master/usage)目录。
 
 ## 如何自编译
 
