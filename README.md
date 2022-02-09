@@ -1,13 +1,9 @@
 # 本仓库提供群晖系统缺失的一些iptables模块
 
-- [用于透明代理 (support transparent proxy)](usage/v2raya-transparent-proxy.md)
-- 修复Docker IPv6问题 (fix docker ipv6 issue)
+- [用于透明代理](usage/v2raya-transparent-proxy.md)
+- 修复Docker IPv6问题
 
 理论上只要架构、内核以及iptables版本吻合，预编译的模块就可以使用，或者说小版本的系统升级一般不会升级内核，可以继续使用。不吻合切勿尝试，可能造成未知的系统问题。
-
-📝 文件名含ip6的用于修复Docker IPv6问题，其余的用于透明代理，根据需要选择
-
-📝 ko内核模块和so用户模块需要同时安装
 
 ## 准备工作
 
@@ -37,9 +33,13 @@ iptables v1.8.3 (legacy)
 
 上传相应的ko模块至/lib/modules/，上传相应的so模块至/usr/lib/iptables/，即可。
 
+📝 文件名含ip6的用于修复Docker IPv6问题，其余的用于透明代理，根据需要选择
+
+📝 ko内核模块和so用户模块需要同时安装
+
 ⚠️ Windows用户注意，模块文件名是区分大小写的，大写的为标记模块，小写的为匹配模块，它们之间是相辅相成的，切勿彼此覆盖。
 
-以下以DS3617xs 6.2.3-25426为例，加载透明代理所需的ko内核模块。
+以下以DS3617xs 6.2.3-25426为例，尝试加载透明代理所需的ko内核模块。
 
 由于模块互相有依赖性，需按一定顺序加载，有些是系统自带的模块。如果提示File Exists，说明已经加载，如果没有提示，说明加载成功。不同内核版本netfilter编译输出的ko内核模块可能不完全一样。
 
@@ -59,7 +59,7 @@ insmod /lib/modules/iptable_mangle.ko
 
 运行lsmod查看已加载的内核模块列表，或运行dmesg | tail查看加载失败的原因。
 
-具体实践分享请查阅[usage](syno-iptables/tree/master/usage)目录。
+具体实践分享请查阅[usage](usage)目录。
 
 ## 如何自编译
 
