@@ -1,7 +1,7 @@
 # 本仓库提供群晖系统缺失的一些iptables模块
 
-- [用于透明代理](usage/v2raya-transparent-proxy.md)
-- 修复Docker IPv6问题
+* 用于透明代理
+* 支持Docker IPv6 NAT
 
 理论上只要架构、内核以及iptables版本吻合，预编译的模块就可以使用，或者说小版本的系统升级一般不会升级内核，可以继续使用。不吻合切勿尝试，可能造成未知的系统问题。
 
@@ -9,25 +9,26 @@
 
 通过该页面[Synology Architectures](https://github.com/SynoCommunity/spksrc/wiki/Synology-and-SynoCommunity-Package-Architectures)查询架构，比如DS918+的架构为apollolake
 
-通过uname -a命令查询内核版本，比如DS918+ 7.0.1-42218系统内核为4.4.180+（结尾的加号代表自定义编译的内核）
+通过uname -a命令查询内核版本，比如DS918+ 7.0.1-42218系统内核为4.4.180+（结尾的加号代表自定义编译的4.X内核）
 
-```bash
+```text
 Linux DSM7 4.4.180+ #42218 SMP Mon Oct 18 19:17:56 CST 2021 x86_64 GNU/Linux synology_apollolake_918+
 ```
 
 通过iptables -V命令查询iptables版本
 
-```bash
+```text
 iptables v1.8.3 (legacy)
 ```
 
 本仓库提供以下系统的预编译模块，经测试可以正常加载。
 
-| arch       | kernel    | iptables version | system model | platform version |
-| :--------- | :-------- | :--------------- | :----------- | :--------------- |
-| apollolake | 4.4.180+  | v1.8.3           | DS918+       | 7.0.1-42218      |
-| apollolake | 4.4.59+   | v1.6.0           | DS918+       | 6.2.3-25426      |
-| broadwell  | 3.10.105+ | v1.6.0           | DS3617xs     | 6.2.3-25426      |
+| arch       | kernel   | iptables version | system model | platform version |
+| :--------- | :------- | :--------------- | :----------- | :--------------- |
+| apollolake | 4.4.180+ | v1.8.3           | DS918+       | 7.0.1-42218      |
+| apollolake | 4.4.59+  | v1.6.0           | DS918+       | 6.2.3-25426      |
+| broadwell  | 3.10.105 | v1.6.0           | DS3617xs     | 6.2.3-25426      |
+| bromolow   | 3.10.105 | v1.6.0           | DS3615xs     | 6.2.3-25426      |
 
 ## 安装并尝试加载
 
@@ -41,7 +42,7 @@ iptables v1.8.3 (legacy)
 
 以下以DS3617xs 6.2.3-25426为例，尝试加载透明代理所需的ko内核模块。
 
-由于模块互相有依赖性，需按一定顺序加载，有些是系统自带的模块。如果提示File Exists，说明已经加载，如果没有提示，说明加载成功。不同内核版本netfilter编译输出的ko内核模块可能不完全一样。
+由于模块互相有依赖性，需按一定顺序加载，有些是系统自带的模块。如果提示File Exists，说明已经加载，如果没有提示，说明加载成功。
 
 ```bash
 sudo -i
@@ -57,16 +58,21 @@ insmod /lib/modules/xt_TPROXY.ko
 insmod /lib/modules/iptable_mangle.ko
 ```
 
-运行lsmod查看已加载的内核模块列表，或运行dmesg | tail查看加载失败的原因。
+📝 运行lsmod查看已加载的内核模块列表，或运行dmesg | tail查看加载失败的原因。
 
-具体实践分享请查阅[usage](usage)目录。
+⚠️ 不同内核版本netfilter编译生成的ko内核模块可能不完全一样。比如，nf_tproxy_core.ko模块只有3.X内核才会有，nf_nat_masquerade_ipv6.ko模块只有4.X内核才会有。
 
 ## 如何自编译
 
 本仓库无法提供适合所有群晖系统的预编译模块，或者不愿意使用预编译模块，可以尝试[自编译](BUILD.md)。
 
+## 具体实践分享
+
+* [群晖实现v2rayA透明代理模式](usage/v2raya-transparent-proxy.md)
+* [支持Docker IPv6 NAT (DSM 6)](usage/docker-ipv6-nat-dsm6.md)
+
 ## 感谢
 
-- [在群晖部署适用 IPv6、Fullcone NAT 的旁路由透明代理](https://blog.kaaass.net/archives/1576)
-- [spksrc - a cross compilation framework](https://github.com/SynoCommunity/spksrc)
-- [fix synology docker ipv6 issue](https://github.com/wangliangliang2/fix_synology_docker_ipv6)
+* [在群晖部署适用 IPv6、Fullcone NAT 的旁路由透明代理](https://blog.kaaass.net/archives/1576)
+* [spksrc - a cross compilation framework](https://github.com/SynoCommunity/spksrc)
+* [fix synology docker ipv6 issue](https://github.com/wangliangliang2/fix_synology_docker_ipv6)

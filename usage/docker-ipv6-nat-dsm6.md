@@ -6,7 +6,7 @@
 
 以下操作可能会使得容器直接暴露在公网ipv6下，有一定风险，安全起见可在配置docker fixed-cidr-v6时设置一个内网ipv6地址段；潜在弊端是新建立的容器会自动监听ipv6，如果要关闭ipv6访问需要更改容器的hostconfig.json配置文件，略显麻烦。
 
-**在此提供另一种选择**：https://github.com/robbertkl/docker-ipv6nat ，该仓库是ipv6 nat的实现，以及罗列了一些ipv6相关问题，可以作为参考。
+**在此提供另一种选择**：<https://github.com/robbertkl/docker-ipv6nat> ，该仓库是docker非官方实现，稳定运行很久，如遇到ipv6相关问题，也可以尝试。
 
 ## 准备工作
 
@@ -19,13 +19,9 @@
 Linux DiskStation 3.10.105 #24922 SMP Wed Jul 3 16:37:23 CST 2019 x86_64 GNU/Linux synology_broadwell_3617xs
 ```
 
-
-
 | arch      | kernel   | iptables version | system model | platform version |
 | --------- | -------- | ---------------- | ------------ | ---------------- |
 | broadwell | 3.10.105 | v1.6.0           | DS3617xs     | 6.2.2-24922      |
-
-
 
 ## 使用
 
@@ -37,21 +33,19 @@ docker配置文件参考，路径 /var/packages/Docker/etc/dockerd.json，以下
 
 ```json
 {
-	"data-root" : "/var/packages/Docker/target/docker",
-	"log-driver" : "db",
-	"registry-mirrors" : [],
-	"storage-driver" : "btrfs",
-	"ipv6": true,
-	"fixed-cidr-v6": "fd00::/80",
-	"experimental": true,
-	"ip6tables": true,
-	"userland-proxy": true
+    "data-root" : "/var/packages/Docker/target/docker",
+    "log-driver" : "db",
+    "registry-mirrors" : [],
+    "storage-driver" : "btrfs",
+    "ipv6": true,
+    "fixed-cidr-v6": "fd00::/80",
+    "experimental": true,
+    "ip6tables": true,
+    "userland-proxy": true
 }
 ```
 
 配置好后重启docker，如果提示启动失败那么重启一下系统
-
-
 
 ## 测试
 
@@ -86,8 +80,6 @@ Chain DOCKER (1 references)
     0     0 RETURN     all      docker0 *       ::/0                 ::/0
     0     0 DNAT       tcp      !docker0 *       ::/0                 ::/0                 tcp dpt:3306 to:[fd00::242:xxxx:3]:3306
 ```
-
-
 
 另外，请教过大佬之后得知，20版本后的docker nat不会自动转换ipv6。如果需要其他容器也能**被**ipv6访问，只需找到容器目录下 `hostconfig.json`文件，将其中hostIp监听的地址从`"hostIp":"0.0.0.0"`改为 `"hostIp":""`即可同时监听ipv6和ipv6。PS：经过测试，新创建的容器会自动监听ipv6，以上修改hostIp仅针对容器之前已经存在并且没有按预期监听ipv6地址。
 
@@ -144,8 +136,7 @@ Chain DOCKER (1 references)
 
 ## 感谢
 
-- [spksrc - a cross compilation framework](https://github.com/SynoCommunity/spksrc)
-- [fix_synology_docker_ipv6](https://github.com/wangliangliang2/fix_synology_docker_ipv6)
-- [docker-ipv6nat](https://github.com/robbertkl/docker-ipv6nat)
-- [docker-proxy存在合理性分析](https://www.jianshu.com/p/91002d316185)
-
+* [spksrc - a cross compilation framework](https://github.com/SynoCommunity/spksrc)
+* [fix_synology_docker_ipv6](https://github.com/wangliangliang2/fix_synology_docker_ipv6)
+* [docker-ipv6nat](https://github.com/robbertkl/docker-ipv6nat)
+* [docker-proxy存在合理性分析](https://www.jianshu.com/p/91002d316185)

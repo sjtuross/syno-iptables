@@ -15,6 +15,7 @@ docker run -it -v $(pwd):/spksrc ghcr.io/synocommunity/spksrc /bin/bash
 syno-apollolake-7.0为对应系统版本的代号为目录名，请自行调整
 
 ```bash
+cd /spksrc
 make setup
 cd /spksrc/kernel/syno-apollolake-7.0
 make
