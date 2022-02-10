@@ -1,7 +1,7 @@
 # 本仓库提供群晖系统缺失的一些iptables模块
 
 * 用于透明代理
-* 支持Docker IPv6 NAT
+* 支持原生Docker IPv6 NAT模式
 
 理论上只要架构、内核以及iptables版本吻合，预编译的模块就可以使用，或者说小版本的系统升级一般不会升级内核，可以继续使用。不吻合切勿尝试，可能造成未知的系统问题。
 
@@ -34,9 +34,9 @@ iptables v1.8.3 (legacy)
 
 上传相应的ko模块至/lib/modules/，上传相应的so模块至/usr/lib/iptables/，即可。
 
-📝 文件名含ip6的用于修复Docker IPv6问题，其余的用于透明代理，根据需要选择
+📝 文件名含ip6的用于支持Docker IPv6 NAT，其余的用于透明代理，根据需要选择。
 
-📝 ko内核模块和so用户模块需要同时安装
+📝 ko内核模块和so用户模块需要同时安装。
 
 ⚠️ Windows用户注意，模块文件名是区分大小写的，大写的为标记模块，小写的为匹配模块，它们之间是相辅相成的，切勿彼此覆盖。
 
@@ -69,7 +69,8 @@ insmod /lib/modules/iptable_mangle.ko
 ## 具体实践分享
 
 * [群晖实现v2rayA透明代理模式](usage/v2raya-transparent-proxy.md)
-* [支持Docker IPv6 NAT (DSM 6)](usage/docker-ipv6-nat-dsm6.md)
+* [群晖支持原生Docker IPv6 NAT模式 (DSM 6)](usage/docker-ipv6-nat-dsm6.md)
+* [群晖支持原生Docker IPv6 NAT模式 (DSM 7)](usage/docker-ipv6-nat-dsm7.md)
 
 ## 感谢
 
