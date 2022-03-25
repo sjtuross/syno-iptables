@@ -9,13 +9,13 @@
 
 通过该页面[Synology Architectures](https://github.com/SynoCommunity/spksrc/wiki/Synology-and-SynoCommunity-Package-Architectures)查询架构，比如DS918+的架构为apollolake
 
-通过uname -a命令查询内核版本，比如DS918+ 7.0.1-42218系统内核为4.4.180+（结尾的加号代表自定义编译的4.X内核）
+通过`uname -a`命令查询内核版本，比如DS918+ 7.0.1-42218系统内核为4.4.180+（结尾的加号代表自定义编译的4.X内核）
 
 ```text
 Linux DSM7 4.4.180+ #42218 SMP Mon Oct 18 19:17:56 CST 2021 x86_64 GNU/Linux synology_apollolake_918+
 ```
 
-通过iptables -V命令查询iptables版本
+通过`iptables -V`命令查询iptables版本
 
 ```text
 iptables v1.8.3 (legacy)
@@ -58,7 +58,7 @@ insmod /lib/modules/xt_TPROXY.ko
 insmod /lib/modules/iptable_mangle.ko
 ```
 
-📝 运行lsmod查看已加载的内核模块列表，或运行dmesg | tail查看加载失败的原因。
+📝 运行`lsmod`查看已加载的内核模块列表，或运行`dmesg | tail`查看加载失败的原因。
 
 ⚠️ 不同内核版本netfilter编译生成的ko内核模块可能不完全一样。比如，nf_tproxy_core.ko模块只有3.X内核才会有，nf_nat_masquerade_ipv6.ko模块只有4.X内核才会有。
 
@@ -71,6 +71,7 @@ insmod /lib/modules/iptable_mangle.ko
 * [群晖实现v2rayA透明代理模式](usage/v2raya-transparent-proxy.md)
 * [群晖支持原生Docker IPv6 NAT模式 (DSM 6)](usage/docker-ipv6-nat-dsm6.md)
 * [群晖支持原生Docker IPv6 NAT模式 (DSM 7)](usage/docker-ipv6-nat-dsm7.md)
+* [群晖Docker安装OpenWrt旁路由](usage/docker-openwrt-transparent-proxy.md)
 
 ## 感谢
 
