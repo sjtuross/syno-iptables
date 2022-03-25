@@ -53,6 +53,7 @@ insmod /lib/modules/xt_set.ko
 insmod /lib/modules/ip_set_hash_net.ko
 insmod /lib/modules/xt_mark.ko
 insmod /lib/modules/xt_connmark.ko
+insmod /lib/modules/xt_comment.ko
 insmod /lib/modules/nf_tproxy_core.ko
 insmod /lib/modules/xt_TPROXY.ko
 insmod /lib/modules/iptable_mangle.ko

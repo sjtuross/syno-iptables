@@ -29,7 +29,15 @@ docker pull esirpg/buddha:latest
 启动OpenWrt容器固件，指定旁路由IP 192.168.1.2
 
 ```bash
-docker run -d --restart always --name esirpg-buddha --privileged --network mac-net --ip=192.168.1.2 esirpg/buddha /sbin/init
+docker run -d \
+  --restart always \
+  --name esirpg-buddha \
+  --privileged \
+  -v /lib/modules:/lib/modules \
+  --network mac-net \
+  --ip=192.168.1.2 \
+  esirpg/buddha:latest \
+  /sbin/init
 ```
 
 进入容器设置OpenWrt LAN IP 192.168.1.2

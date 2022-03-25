@@ -48,6 +48,7 @@ cd /spksrc/toolchain/syno-apollolake-7.0/work
 MODULE=/spksrc/kernel/syno-apollolake-7.0/work/linux/net/netfilter
 MODULE6=/spksrc/kernel/syno-apollolake-7.0/work/linux/net/ipv6/netfilter
 export CONFIG_NETFILTER_XT_CONNMARK=m
+export CONFIG_NETFILTER_XT_MATCH_COMMENT=m
 export CONFIG_NETFILTER_TPROXY=m
 export CONFIG_NETFILTER_XT_TARGET_TPROXY=m
 export CONFIG_IP6_NF_TARGET_MASQUERADE=m
