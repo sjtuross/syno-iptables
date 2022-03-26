@@ -66,6 +66,7 @@ mkdir build/ipset
 cp $MODULE/*.ko build
 cp $MODULE/ipset/*.ko build/ipset
 cp $MODULE6/*.ko build
+find build/ -iname "*.ko" -exec strip --strip-unneeded {} \;
 ```
 
 📝 编译之后ko文件在build目录中
