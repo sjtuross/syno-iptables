@@ -70,10 +70,10 @@ insmod /lib/modules/iptable_mangle.ko
 
 ## 具体实践分享
 
-* [群晖实现v2rayA透明代理模式](usage/v2raya-transparent-proxy.md)
-* [群晖支持原生Docker IPv6 NAT模式 (DSM 6)](usage/docker-ipv6-nat-dsm6.md)
-* [群晖支持原生Docker IPv6 NAT模式 (DSM 7)](usage/docker-ipv6-nat-dsm7.md)
-* [群晖Docker安装OpenWrt旁路由](usage/docker-openwrt-transparent-proxy.md)
+* [v2rayA透明代理模式](https://github.com/sjtuross/syno-iptables/wiki/v2rayA透明代理模式)
+* [Docker安装OpenWrt旁路由](https://github.com/sjtuross/syno-iptables/wiki/Docker安装OpenWrt旁路由)
+* [原生Docker IPv6 NAT模式 (DSM 6)](https://github.com/sjtuross/syno-iptables/wiki/原生Docker-IPv6-NAT模式-(DSM-6))
+* [原生Docker IPv6 NAT模式 (DSM 7)](https://github.com/sjtuross/syno-iptables/wiki/原生Docker-IPv6-NAT模式-(DSM-7))
 
 ## 感谢
 
