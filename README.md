@@ -56,6 +56,7 @@ insmod /lib/modules/xt_connmark.ko
 insmod /lib/modules/xt_comment.ko
 insmod /lib/modules/nf_tproxy_core.ko
 insmod /lib/modules/xt_TPROXY.ko
+insmod /lib/modules/xt_socket.ko
 insmod /lib/modules/iptable_mangle.ko
 ```
 
