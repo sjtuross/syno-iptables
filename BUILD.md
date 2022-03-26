@@ -85,6 +85,8 @@ cd iptables-1.8.3
 make && make install
 ```
 
+📝 编译之后so文件在extensions子目录中
+
 iptables v1.6.0，适用于syno-apollolake-6.2.3，请自行调整
 
 ```bash
