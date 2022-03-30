@@ -25,7 +25,7 @@ make
 
 ## 设置交叉编译环境变量
 
-⚠️ syno-apollolake-7.0为对应系统版本的代号为目录名，请自行调整
+📝 以x86_64平台为例
 
 ```bash
 export PATH="${PATH}:/spksrc/toolchain/syno-apollolake-7.0/work/x86_64-pc-linux-gnu/bin"
@@ -37,6 +37,20 @@ export CXX=${CROSS}-g++
 export CROSS_COMPILE=/spksrc/toolchain/syno-apollolake-7.0/work/x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu-
 export ARCH=x86_64
 export KSRC=/spksrc/kernel/syno-apollolake-7.0/work/linux
+```
+
+📝 以arm64平台为例
+
+```bash
+export PATH="${PATH}:/spksrc/toolchain/syno-rtd1296-7.0/work/aarch64-unknown-linux-gnu/bin"
+export CROSS=aarch64-unknown-linux-gnu
+export CC=${CROSS}-gcc
+export LD=${CROSS}-ld
+export AS=${CROSS}-as
+export CXX=${CROSS}-g++
+export CROSS_COMPILE=/spksrc/toolchain/syno-rtd1296-7.0/work/aarch64-unknown-linux-gnu/bin/aarch64-unknown-linux-gnu-
+export ARCH=arm64
+export KSRC=/spksrc/kernel/syno-rtd1296-7.0/work/linux
 ```
 
 ## 编译netfilter内核模块
@@ -67,7 +81,7 @@ mkdir build/ipset
 cp $MODULE/*.ko build
 cp $MODULE/ipset/*.ko build/ipset
 cp $MODULE6/*.ko build
-find build/ -iname "*.ko" -exec strip --strip-unneeded {} \;
+find build/ -iname "*.ko" -exec ${CROSS_COMPILE}strip --strip-unneeded {} \;
 ```
 
 📝 编译之后ko文件在build目录中
@@ -81,7 +95,7 @@ cd /spksrc/toolchain/syno-apollolake-7.0/work
 wget https://www.netfilter.org/pub/iptables/iptables-1.8.3.tar.bz2
 tar xjf iptables-1.8.3.tar.bz2
 cd iptables-1.8.3
-./configure --prefix="/spksrc/toolchain/syno-apollolake-7.0/work/build" --disable-nftables
+./configure --host=$CROSS --prefix="/spksrc/toolchain/syno-apollolake-7.0/work/build" --disable-nftables
 make && make install
 ```
 
@@ -94,7 +108,7 @@ cd /spksrc/toolchain/syno-apollolake-6.2.3/work
 wget https://www.netfilter.org/pub/iptables/iptables-1.6.0.tar.bz2
 tar xjf iptables-1.6.0.tar.bz2
 cd iptables-1.6.0
-./configure --prefix="/spksrc/toolchain/syno-apollolake-6.2.3/work/build" --disable-nftables
+./configure --host=$CROSS --prefix="/spksrc/toolchain/syno-apollolake-6.2.3/work/build" --disable-nftables
 make && make install
 ```
 

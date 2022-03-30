@@ -64,7 +64,7 @@ insmod /lib/modules/iptable_mangle.ko
 
 ⚠️ 不同内核版本netfilter编译生成的ko内核模块可能不完全一样。比如，`nf_tproxy_core.ko`模块只有3.X内核才会有，`nf_nat_masquerade_ipv6.ko`模块只有4.X内核才会有。
 
-为了群晖重启之后自动加载所需的内核模块，参考[通用模块加载的方法](https://github.com/sjtuross/syno-iptables/wiki/通用模块加载的方法)。
+📝 为了群晖重启之后自动加载所需的内核模块，参考[通用模块加载的方法](https://github.com/sjtuross/syno-iptables/wiki/通用模块加载的方法)。
 
 ## 如何自编译
 
