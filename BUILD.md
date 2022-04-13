@@ -7,7 +7,7 @@
 ```bash
 git clone https://github.com/SynoCommunity/spksrc.git
 cd spksrc
-docker run -it -v $(pwd):/spksrc ghcr.io/synocommunity/spksrc /bin/bash
+docker run -it --rm -v $(pwd):/spksrc ghcr.io/synocommunity/spksrc /bin/bash
 ```
 
 ## 在编译容器中准备及下载所需的kernel和toolchain
@@ -58,12 +58,14 @@ export KSRC=/spksrc/kernel/syno-rtd1296-7.0/work/linux
 ⚠️ syno-apollolake-7.0为对应系统版本的代号为目录名，请自行调整
 
 ```bash
-cd /spksrc/toolchain/syno-apollolake-7.0/work
-MODULE=/spksrc/kernel/syno-apollolake-7.0/work/linux/net/netfilter
-MODULE6=/spksrc/kernel/syno-apollolake-7.0/work/linux/net/ipv6/netfilter
+cd /spksrc/kernel/syno-apollolake-7.0/work
+MODULE=net/netfilter
+MODULE6=net/ipv6/netfilter
+LIB=lib
 export CONFIG_NETFILTER_XT_CONNMARK=m
 export CONFIG_NETFILTER_XT_MATCH_COMMENT=m
 export CONFIG_NETFILTER_XT_MATCH_SOCKET=m
+export CONFIG_NETFILTER_XT_MATCH_STRING=m
 export CONFIG_NETFILTER_TPROXY=m
 export CONFIG_NETFILTER_XT_TARGET_TPROXY=m
 export CONFIG_IP6_NF_TARGET_MASQUERADE=m
@@ -71,20 +73,25 @@ export CONFIG_IP6_NF_NAT=m
 export CONFIG_IP6_NF_RAW=m
 export CONFIG_NF_NAT_IPV6=m
 export CONFIG_NF_NAT_MASQUERADE_IPV6=m
+export CONFIG_TEXTSEARCH=m
+export CONFIG_TEXTSEARCH_BM=m
 make ARCH=$ARCH CROSS_COMPILE=$CROSS_COMPILE -C $KSRC M=$MODULE clean
 make ARCH=$ARCH CROSS_COMPILE=$CROSS_COMPILE -C $KSRC M=$MODULE6 clean
+make ARCH=$ARCH CROSS_COMPILE=$CROSS_COMPILE -C $KSRC M=$LIB clean
 make ARCH=$ARCH CROSS_COMPILE=$CROSS_COMPILE -C $KSRC M=$MODULE modules -j 4
 make ARCH=$ARCH CROSS_COMPILE=$CROSS_COMPILE -C $KSRC M=$MODULE6 modules -j 4
+make ARCH=$ARCH CROSS_COMPILE=$CROSS_COMPILE -C $KSRC M=$LIB modules -j 4
 rm -rf build
 mkdir build
 mkdir build/ipset
-cp $MODULE/*.ko build
-cp $MODULE/ipset/*.ko build/ipset
-cp $MODULE6/*.ko build
+cp linux/$MODULE/*.ko build
+cp linux/$MODULE/ipset/*.ko build/ipset
+cp linux/$MODULE6/*.ko build
+cp linux/$LIB/*.ko build
 find build/ -iname "*.ko" -exec ${CROSS_COMPILE}strip --strip-unneeded {} \;
 ```
 
-📝 编译之后ko文件在build目录中
+📝 编译之后ko文件在`/spksrc/kernel/syno-apollolake-7.0/work/build`目录中
 
 ## 编译iptables用户模块
 
