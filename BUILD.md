@@ -106,7 +106,7 @@ cd iptables-1.8.3
 make && make install
 ```
 
-📝 编译之后so文件在extensions子目录中
+📝 编译之后so文件在`/spksrc/toolchain/syno-apollolake-7.0/work/iptables-1.8.3/extensions`目录中
 
 iptables v1.6.0，适用于syno-apollolake-6.2.3，请自行调整
 
@@ -119,4 +119,4 @@ cd iptables-1.6.0
 make && make install
 ```
 
-📝 编译之后so文件在extensions子目录中
+📝 编译之后so文件在`/spksrc/toolchain/syno-apollolake-6.2.3/work/iptables-1.6.0/extensions`目录中
