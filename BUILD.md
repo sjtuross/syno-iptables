@@ -21,6 +21,9 @@ cd /spksrc/kernel/syno-apollolake-7.0
 make
 cd /spksrc/toolchain/syno-apollolake-7.0
 make
+cd /spksrc/kernel/syno-apollolake-7.0/work/linux
+make prepare
+make modules_prepare
 ```
 
 ## 设置交叉编译环境变量
