@@ -7,7 +7,7 @@
 ```bash
 git clone https://github.com/SynoCommunity/spksrc.git
 cd spksrc
-docker run -it --rm -v $(pwd):/spksrc ghcr.io/synocommunity/spksrc /bin/bash
+docker run -it --rm -u $(id -u ${USER}):$(id -g ${USER}) -v $(pwd):/spksrc ghcr.io/synocommunity/spksrc /bin/bash
 ```
 
 ## 在编译容器中准备及下载所需的kernel和toolchain
