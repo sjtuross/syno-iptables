@@ -5,7 +5,7 @@
 > - Useful for various transparent proxy services
 > - Support native Docker IPv6 NAT mode
 > - In case there are no precompiled modules for your model or for any other reason you can self compile the modules according to [How to Self Compile](HowToSelfCompile_en.md)
-> translate the page for further information
+> - translate the page for further information
 
 
 
