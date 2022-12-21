@@ -1,7 +1,16 @@
-# 本仓库提供群晖系统缺失的一些iptables模块
+# 本仓库提供群晖系统缺失的一些iptables模块 
 
-* 用于各种透明代理服务
-* 支持原生Docker IPv6 NAT模式
+
+> **_NOTE:_** This repo provides some iptables modules missing in the Synology system 
+> - Useful for various transparent proxy services
+> - Support native Docker IPv6 NAT mode
+> - In case there are no precompiled modules for your model or for any other reason you can self compile the modules according to [How to Self Compile](HowToSelfCompile_en.md)
+> - translate the page for further information
+
+
+
+* 用于各种透明代理服务 
+* 支持原生Docker IPv6 NAT模式 
 
 理论上只要架构、内核以及iptables版本吻合，预编译的模块就可以使用，或者说小版本的系统升级一般不会升级内核，可以继续使用。不吻合切勿尝试，可能造成未知的系统问题。
 
@@ -112,7 +121,7 @@ insmod /lib/modules/ip6table_mangle.ko
 
 ## 如何自编译
 
-本仓库无法提供适合所有群晖系统的预编译模块，或者不愿意使用预编译模块，可以尝试[自编译](BUILD.md)。
+本仓库无法提供适合所有群晖系统的预编译模块，或者不愿意使用预编译模块，可以尝试[自编译](HowToSelfCompile_zh.md)。
 
 ## 具体实践分享
 
