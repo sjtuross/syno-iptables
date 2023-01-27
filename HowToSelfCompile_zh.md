@@ -22,6 +22,7 @@ make
 cd /spksrc/toolchain/syno-apollolake-7.0
 make
 cd /spksrc/kernel/syno-apollolake-7.0/work/linux
+make scripts
 make prepare
 make modules_prepare
 ```
@@ -71,6 +72,7 @@ export CONFIG_NETFILTER_XT_MATCH_SOCKET=m
 export CONFIG_NETFILTER_XT_MATCH_STRING=m
 export CONFIG_NETFILTER_TPROXY=m
 export CONFIG_NETFILTER_XT_TARGET_TPROXY=m
+export CONFIG_NETFILTER_XT_MATCH_OWNER=m
 export CONFIG_IP6_NF_TARGET_MASQUERADE=m
 export CONFIG_IP6_NF_NAT=m
 export CONFIG_IP6_NF_RAW=m
