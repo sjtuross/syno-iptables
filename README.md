@@ -84,6 +84,40 @@ insmod /lib/modules/ip6table_mangle.ko
 
 </details>
 <details>
+<summary>4.4.302 内核</summary>
+
+```bash
+insmod /lib/modules/nfnetlink.ko &> /dev/null
+insmod /lib/modules/ip_set.ko &> /dev/null
+insmod /lib/modules/ip_set_hash_ip.ko &> /dev/null
+insmod /lib/modules/xt_set.ko &> /dev/null
+insmod /lib/modules/ip_set_hash_net.ko &> /dev/null
+insmod /lib/modules/xt_mark.ko &> /dev/null
+insmod /lib/modules/xt_connmark.ko &> /dev/null
+insmod /lib/modules/xt_comment.ko &> /dev/null
+
+insmod /lib/modules/nf_conntrack_ipv6.ko &> /dev/null
+insmod /lib/modules/nf_defrag_ipv6.ko &> /dev/null
+
+insmod /lib/modules/xt_TPROXY.ko &> /dev/null
+insmod /lib/modules/xt_socket.ko &> /dev/null
+insmod /lib/modules/iptable_mangle.ko &> /dev/null
+insmod /lib/modules/textsearch.ko &> /dev/null
+insmod /lib/modules/ts_bm.ko &> /dev/null
+insmod /lib/modules/xt_string.ko &> /dev/null
+
+insmod /lib/modules/ip6_tables.ko &> /dev/null
+insmod /lib/modules/nf_nat.ko &> /dev/null
+insmod /lib/modules/nf_nat_ipv6.ko &> /dev/null
+insmod /lib/modules/nf_nat_masquerade_ipv6.ko &> /dev/null
+insmod /lib/modules/ip6t_MASQUERADE.ko &> /dev/null
+insmod /lib/modules/ip6table_nat.ko &> /dev/null
+insmod /lib/modules/ip6table_raw.ko &> /dev/null
+insmod /lib/modules/ip6table_mangle.ko &> /dev/null
+```
+</details>
+
+<details>
 <summary>3.X内核</summary>
 
 ```bash
@@ -129,7 +163,7 @@ insmod /lib/modules/ip6table_mangle.ko
 * [v2rayA透明代理模式](https://github.com/sjtuross/syno-iptables/wiki/v2rayA透明代理模式)
 * [Docker安装OpenWrt旁路由](https://github.com/sjtuross/syno-iptables/wiki/Docker安装OpenWrt旁路由)
 * [原生Docker IPv6 NAT模式 (DSM 6)](https://github.com/sjtuross/syno-iptables/wiki/原生Docker-IPv6-NAT模式-(DSM-6))
-* [原生Docker IPv6 NAT模式 (DSM 7)](https://github.com/sjtuross/syno-iptables/wiki/原生Docker-IPv6-NAT模式-(DSM-7))
+* [原生Docker IPv6 NAT模式 (DSM 7.x)](https://github.com/sjtuross/syno-iptables/wiki/原生Docker-IPv6-NAT模式-(DSM-7.x))
 
 ## 感谢
 
